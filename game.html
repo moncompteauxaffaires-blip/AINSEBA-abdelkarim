@@ -1,74 +1,45 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prince vs Boss</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Game</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
-        #game { margin: 20px 0; }
-        .kingdom { margin: 10px; padding: 20px; border: 1px solid #ccc; } 
-        .status { font-weight: bold; }
+        /* Mobile responsiveness improvements */
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            margin: 10px 0;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h1>Prince vs Boss</h1>
-    <div id="game">
-        <h2 id="kingdom-title"></h2>
-        <div class="status">Vies: <span id="lives"></span></div>
-        <div class="status">Boss HP: <span id="boss-hp"></span></div>
-        <button id="attack-button">Attaquer</button>
-        <div id="message"></div>
+    <div class="container">
+        <h1>Welcome to the Game</h1>
+        <button>Start Game</button>
+        <button>Settings</button>
+        <button>Exit</button>
     </div>
-    <script>
-        const kingdoms = [
-            { name: 'Royaume 1', bossHp: 10 },
-            { name: 'Royaume 2', bossHp: 15 },
-            { name: 'Royaume 3', bossHp: 20 },
-            { name: 'Royaume 4', bossHp: 25 },
-            { name: 'Royaume 5', bossHp: 30 },
-            { name: 'Royaume 6', bossHp: 35 },
-            { name: 'Royaume 7', bossHp: 40 }
-        ];
-
-        let currentKingdom = 0;
-        let lives = 3;
-        let bossHp = kingdoms[currentKingdom].bossHp;
-
-        function updateUI() {
-            document.getElementById('kingdom-title').innerText = kingdoms[currentKingdom].name;
-            document.getElementById('lives').innerText = lives;
-            document.getElementById('boss-hp').innerText = bossHp;
-            document.getElementById('message').innerText = '';
-        }
-
-        document.getElementById('attack-button').addEventListener('click', () => {
-            const damage = Math.floor(Math.random() * 5) + 1;
-            bossHp -= damage;
-            document.getElementById('message').innerText = `Vous infligez ${damage} dommages.`;
-
-            if (bossHp <= 0) {
-                document.getElementById('message').innerText = 'Vous avez vaincu le boss!';
-                currentKingdom++;
-                if (currentKingdom < kingdoms.length) {
-                    bossHp = kingdoms[currentKingdom].bossHp;
-                    updateUI();
-                } else {
-                    document.getElementById('message').innerText = 'Vous avez sauvé la princesse!';
-                }
-            } else {
-                const bossDamage = Math.floor(Math.random() * 3) + 1;
-                lives -= bossDamage;
-                document.getElementById('message').innerText += ` Le boss vous inflige ${bossDamage} dommages!`;
-
-                if (lives <= 0) {
-                    document.getElementById('message').innerText = 'Vous êtes mort! Fin du jeu.';
-                }
-            }
-            updateUI();
-        });
-
-        updateUI();
-    </script>
 </body>
 </html>
